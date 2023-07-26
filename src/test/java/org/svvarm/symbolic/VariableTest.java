@@ -4,6 +4,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.Map;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -33,5 +35,24 @@ class VariableTest {
   })
   void invalidNames(final String name) {
     assertThrows(IllegalArgumentException.class, () -> new Variable(name));
+  }
+
+  @Test
+  void testEvaluate_whenMappingExists_thenReturnMappedValue() {
+    final Variable x = new Variable("x");
+    final Variable y = new Variable("y");
+
+    final Expression evaluated = x.evaluate(Map.of(x, y));
+
+    assertThat(evaluated, is(y));
+  }
+
+  @Test
+  void testEvaluate_whenNoMappingExists_thenReturnVariable() {
+    final Variable x = new Variable("x");
+
+    final Expression evaluated = x.evaluate(Map.of());
+
+    assertThat(evaluated, is(x));
   }
 }

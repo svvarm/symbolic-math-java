@@ -1,5 +1,7 @@
 package org.svvarm.symbolic;
 
+import java.util.Map;
+
 /**
  * A mathematical expression. Expression is the basis for other symbolic objects.
  *
@@ -20,4 +22,12 @@ public interface Expression {
    * @return simplified expression
    */
   Expression simplify();
+
+  /**
+   * Evaluates the variables with the given expressions.
+   *
+   * @param values the map of variables
+   * @return the evaluated expression
+   */
+  Expression evaluate(Map<Variable, Expression> values);
 }

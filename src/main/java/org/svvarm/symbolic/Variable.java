@@ -1,5 +1,6 @@
 package org.svvarm.symbolic;
 
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -26,5 +27,10 @@ public record Variable(String name) implements Expression {
   @Override
   public Expression simplify() {
     return this;
+  }
+
+  @Override
+  public Expression evaluate(final Map<Variable, Expression> values) {
+    return values.getOrDefault(this, this);
   }
 }

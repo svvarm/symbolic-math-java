@@ -2,6 +2,7 @@ package org.svvarm.symbolic;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.sameInstance;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Map;
@@ -20,10 +21,9 @@ class VariableTest {
       "variableName",
       "u_n_d_e_r_s_c_o_r_e",
   })
-  void validNames(final String name) {
+  void testValidNames(final String name) {
     final Variable variable = Variable.of(name);
     assertThat(variable.getName(), is(name));
-    assertThat(variable.simplify(), is(variable));
   }
 
   @ParameterizedTest
@@ -35,7 +35,7 @@ class VariableTest {
       "1startsWithNumber",
       "StartsWithCapital"
   })
-  void invalidNames(final String name) {
+  void testInvalidNames(final String name) {
     assertThrows(RuntimeException.class, () -> Variable.of(name));
   }
 
@@ -56,5 +56,12 @@ class VariableTest {
     final Expression evaluated = x.evaluate(Map.of());
 
     assertThat(evaluated, is(x));
+  }
+
+  @Test
+  void testSimplify_whenAnyVariable_thenReturnSelf() {
+    final Variable x = Variable.of("x");
+
+    assertThat(x.simplify(), sameInstance(x));
   }
 }

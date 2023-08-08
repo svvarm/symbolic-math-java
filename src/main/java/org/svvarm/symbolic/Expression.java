@@ -14,7 +14,7 @@ public interface Expression {
    *
    * @return string representation of the expression
    */
-  String mathString();
+  String asMathString();
 
   /**
    * Simplifies the expression.

@@ -14,5 +14,5 @@ public interface Function extends Expression {
    *
    * @return function arguments
    */
-  List<Expression> arguments();
+  List<Expression> getArguments();
 }

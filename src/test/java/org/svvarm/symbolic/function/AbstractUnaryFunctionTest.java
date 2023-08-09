@@ -32,9 +32,7 @@ class AbstractUnaryFunctionTest {
     final Expression argument = Variable.of("x");
     when(subject.getArgument()).thenReturn(argument);
 
-    final String mathString = subject.joinArgumentMathStrings("");
-
-    assertThat(mathString, is(argument.asMathString()));
+    assertThat(subject.joinArgumentMathStrings(""), is(argument.asMathString()));
   }
 
   @Test

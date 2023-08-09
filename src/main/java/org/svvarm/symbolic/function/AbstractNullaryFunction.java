@@ -1,7 +1,9 @@
 package org.svvarm.symbolic.function;
 
 import java.util.List;
+import java.util.Map;
 import org.svvarm.symbolic.Expression;
+import org.svvarm.symbolic.Variable;
 
 /**
  * An abstract implementation of a function with no arguments.
@@ -19,5 +21,15 @@ public abstract class AbstractNullaryFunction extends AbstractFunction {
   protected String joinArgumentMathStrings(final CharSequence delimiter) {
     // optimized for no argument
     return "";
+  }
+
+  @Override
+  public Expression simplify() {
+    return this;
+  }
+
+  @Override
+  public Expression evaluate(final Map<Variable, Expression> values) {
+    return this;
   }
 }

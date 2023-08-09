@@ -3,6 +3,7 @@ package org.svvarm.symbolic.function;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.sameInstance;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,5 +24,15 @@ class AbstractNullaryFunctionTest {
   @Test
   void testJoinArgumentMathStrings() {
     assertThat(subject.joinArgumentMathStrings(","), is(""));
+  }
+
+  @Test
+  void testSimplify() {
+    assertThat(subject.simplify(), sameInstance(subject));
+  }
+
+  @Test
+  void testEvaluate() {
+    assertThat(subject.evaluate(null), sameInstance(subject));
   }
 }

@@ -20,16 +20,12 @@ import org.svvarm.symbolic.Variable;
 @ExtendWith(MockitoExtension.class)
 class AbstractFunctionTest {
 
-  private static final List<Expression> ARGS = List.of(
-      Variable.of("x"),
-      Variable.of("y"));
-
   @Spy
   private AbstractFunction subject;
 
   @Test
   void testJoinArgumentMathStrings() {
-    when(subject.getArguments()).thenReturn(ARGS);
+    when(subject.getArguments()).thenReturn(List.of(Variable.of("x"), Variable.of("y")));
 
     assertThat(subject.joinArgumentMathStrings(", "), is("x, y"));
     assertThat(subject.joinArgumentMathStrings("+"), is("x+y"));
@@ -37,7 +33,7 @@ class AbstractFunctionTest {
 
   @Test
   void testAsMathString() {
-    when(subject.getArguments()).thenReturn(ARGS);
+    when(subject.getArguments()).thenReturn(List.of(Variable.of("x"), Variable.of("y")));
 
     final String mathString = subject.asMathString();
     assertThat(mathString, startsWith("AbstractFunction"));
@@ -45,7 +41,7 @@ class AbstractFunctionTest {
   }
 
   @Test
-  void testSimplifyArguments_whenAnySimplification_returnSimplifiedList() {
+  void testSimplifyArguments_whenSimplification_returnSimplifiedList() {
     final Expression argument = mock(Expression.class);
     final Expression simplified = mock(Expression.class);
     when(argument.simplify()).thenReturn(simplified);
@@ -55,7 +51,7 @@ class AbstractFunctionTest {
   }
 
   @Test
-  void testSimplifyArguments_whenSimplifications_returnSameArgumentsList() {
+  void testSimplifyArguments_whenNoSimplifications_returnOriginalList() {
     final Expression argument = mock(Expression.class);
     when(argument.simplify()).thenReturn(argument);
     final List<Expression> arguments = List.of(argument);

@@ -3,6 +3,7 @@ package org.svvarm.symbolic.function;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.sameInstance;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -25,6 +26,7 @@ class AbstractUnaryFunctionTest {
     when(subject.getArgument()).thenReturn(argument);
 
     assertThat(subject.getArguments(), contains(argument));
+    assertThat(subject.getArguments(), sameInstance(subject.getArguments())); // lazy
   }
 
   @Test

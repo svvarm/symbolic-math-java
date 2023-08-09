@@ -1,7 +1,6 @@
 package org.svvarm.symbolic.function;
 
 import java.util.List;
-import lombok.Getter;
 import org.svvarm.symbolic.Expression;
 
 /**
@@ -11,8 +10,10 @@ import org.svvarm.symbolic.Expression;
  */
 public abstract class AbstractNullaryFunction extends AbstractFunction {
 
-  @Getter
-  private final List<Expression> arguments = List.of();
+  @Override
+  public List<Expression> getArguments() {
+    return List.of();
+  }
 
   @Override
   protected String joinArgumentMathStrings(final CharSequence delimiter) {

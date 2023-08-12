@@ -19,8 +19,12 @@ public abstract class AbstractNullaryFunction extends AbstractFunction {
 
   @Override
   protected String joinArgumentMathStrings(final CharSequence delimiter) {
-    // optimized for no argument
     return "";
+  }
+
+  @Override
+  public Expression evaluate(final Map<Variable, Expression> values) {
+    return this;
   }
 
   @Override
@@ -29,7 +33,11 @@ public abstract class AbstractNullaryFunction extends AbstractFunction {
   }
 
   @Override
-  public Expression evaluate(final Map<Variable, Expression> values) {
+  protected Expression makeNew(final List<Expression> arguments) {
+    if (!arguments.isEmpty()) {
+      throw new IllegalArgumentException("expected an empty list");
+    }
+
     return this;
   }
 }
